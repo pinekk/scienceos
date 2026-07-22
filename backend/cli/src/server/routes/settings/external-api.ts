@@ -24,6 +24,17 @@ const Login = z.object({
   password: z.string().min(1).max(256),
 })
 
+const Signup = z
+  .object({
+    username: z.string().trim().min(1, "请输入账号").max(20, "账号不能超过 20 个字符"),
+    password: z.string().min(8, "密码至少需要 8 个字符").max(20, "密码不能超过 20 个字符"),
+    confirmation: z.string(),
+  })
+  .refine((input) => input.password === input.confirmation, {
+    message: "两次输入的密码不一致",
+    path: ["confirmation"],
+  })
+
 const State = z.object({
   connected: z.boolean(),
   provider: z.string(),
@@ -223,6 +234,22 @@ async function connect(input: z.infer<typeof Login>) {
   }
 }
 
+async function signup(input: z.infer<typeof Signup>) {
+  const response = await fetch(`${ORIGIN}/api/user/register`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ username: input.username, password: input.password }),
+    signal: AbortSignal.timeout(15_000),
+  })
+  const body = (await response.json().catch(() => ({}))) as Envelope<unknown>
+  if (!response.ok || body.success !== true) throw new Error(body.message || "账号注册失败")
+
+  return connect({ username: input.username, password: input.password }).catch((error) => {
+    const message = error instanceof Error ? error.message : String(error)
+    throw new Error(`注册成功，但自动登录失败：${message}`)
+  })
+}
+
 export const ExternalAPIRoutes = lazy(() =>
   new Hono()
     .get(
@@ -300,6 +327,24 @@ export const ExternalAPIRoutes = lazy(() =>
       validator("json", Login),
       async (c) =>
         connect(c.req.valid("json"))
+          .then((state) => c.json(state))
+          .catch((error) => c.text(error instanceof Error ? error.message : String(error), 400)),
+    )
+    .post(
+      "/register",
+      describeRoute({
+        summary: "Register a scienceos account and configure it",
+        operationId: "settings.externalApi.register",
+        responses: {
+          200: {
+            description: "Registered and connected",
+            content: { "application/json": { schema: resolver(State) } },
+          },
+        },
+      }),
+      validator("json", Signup),
+      async (c) =>
+        signup(c.req.valid("json"))
           .then((state) => c.json(state))
           .catch((error) => c.text(error instanceof Error ? error.message : String(error), 400)),
     ),
