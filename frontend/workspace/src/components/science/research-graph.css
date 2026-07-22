@@ -1,0 +1,95 @@
+.research-graph {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--color-focus) 8%, transparent), transparent 34%), var(--color-bg-subtle);
+}
+
+.research-graph-summary {
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface-solid) 86%, transparent);
+}
+
+.research-graph-heading { display: flex; align-items: center; gap: 10px; }
+.research-graph-icon {
+  width: 30px; height: 30px; display: grid; place-items: center; flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--color-focus) 42%, var(--color-border));
+  border-radius: var(--radius); color: var(--color-text);
+  background: color-mix(in srgb, var(--color-focus) 9%, var(--color-bg));
+}
+.research-graph-heading > div { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 2px; }
+.research-graph-heading small, .research-graph-root small, .research-graph-node-copy small, .research-graph-detail span { color: var(--color-text-faint); font-size: 10px; }
+.research-graph-heading strong, .research-graph-root strong { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.research-graph-heading > i {
+  padding: 3px 6px; border: 1px solid color-mix(in srgb, var(--color-success) 32%, var(--color-border));
+  border-radius: 999px; color: var(--color-success); background: var(--color-success-muted);
+  font-size: 9px; font-style: normal; letter-spacing: .06em;
+}
+.research-graph-summary > p {
+  margin: 12px 0 0; display: -webkit-box; overflow: hidden; color: var(--color-text-muted);
+  font-size: 11px; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+}
+.research-graph-progress-copy { margin-top: 14px; display: flex; justify-content: space-between; color: var(--color-text-muted); font-size: 10px; }
+.research-graph-progress-copy b { color: var(--color-text); font-weight: 600; }
+.research-graph-progress { height: 4px; margin-top: 7px; overflow: hidden; border-radius: 999px; background: var(--color-border); }
+.research-graph-progress span { height: 100%; display: block; border-radius: inherit; background: var(--color-focus); transition: width 180ms ease; }
+.research-graph-scroll { min-height: 0; padding: 18px 14px 30px; overflow: auto; }
+.research-graph-root {
+  width: min(240px, calc(100% - 28px)); min-height: 52px; margin: 0 auto; padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px; border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius); color: var(--color-text-muted); background: var(--color-surface-solid); box-shadow: var(--shadow-xs);
+}
+.research-graph-root > span { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.research-graph-root strong { color: var(--color-text); }
+.research-graph-trunk, .research-graph-edge { width: 1px; display: block; background: var(--color-border-strong); }
+.research-graph-trunk { height: 18px; margin: 0 auto; }
+.research-graph-nodes { width: min(286px, 100%); margin: 0 auto; }
+.research-graph-branch { position: relative; }
+.research-graph-edge { height: 12px; margin: 0 auto; }
+.research-graph-node {
+  width: 100%; min-height: 82px; padding: 11px; display: flex; align-items: flex-start; gap: 10px;
+  border: 1px solid var(--color-border); border-radius: var(--radius); color: var(--color-text);
+  background: color-mix(in srgb, var(--color-surface-solid) 91%, var(--color-bg)); text-align: left; cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+.research-graph-node:hover { border-color: var(--color-border-strong); transform: translateY(-1px); }
+.research-graph-node.active {
+  border-color: color-mix(in srgb, var(--color-focus) 64%, var(--color-border));
+  background: color-mix(in srgb, var(--color-focus) 7%, var(--color-surface-solid));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-focus) 10%, transparent);
+}
+.research-graph-node.complete { opacity: .78; }
+.research-graph-node.active { opacity: 1; }
+.research-graph-marker {
+  width: 24px; height: 24px; display: grid; place-items: center; flex: 0 0 auto;
+  border: 1px solid var(--color-border-strong); border-radius: 50%; color: var(--color-text-muted);
+  background: var(--color-bg); font-size: 10px;
+}
+.research-graph-node.complete .research-graph-marker {
+  border-color: color-mix(in srgb, var(--color-success) 42%, var(--color-border)); color: var(--color-success); background: var(--color-success-muted);
+}
+.research-graph-node.active .research-graph-marker {
+  border-color: var(--color-focus); color: var(--color-text); background: color-mix(in srgb, var(--color-focus) 12%, var(--color-bg));
+}
+.research-graph-node-copy { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.research-graph-node-copy > span { display: flex; align-items: center; justify-content: space-between; }
+.research-graph-node-copy strong { font-size: 12px; font-weight: 600; line-height: 1.3; }
+.research-graph-node-copy > small { line-height: 1.4; }
+.research-graph-state { padding: 2px 5px; border-radius: 999px; color: var(--color-text-faint); background: var(--color-bg-elevated); font-size: 9px; font-style: normal; }
+.research-graph-state.active { color: var(--color-text); background: color-mix(in srgb, var(--color-focus) 13%, var(--color-bg)); }
+.research-graph-state.complete { color: var(--color-success); background: var(--color-success-muted); }
+.research-graph-detail {
+  margin: 7px 8px 0; padding: 9px 10px; display: flex; flex-direction: column; gap: 9px;
+  border: 1px solid var(--color-border); border-top: 0; border-radius: 0 0 var(--radius) var(--radius);
+  background: color-mix(in srgb, var(--color-bg-elevated) 54%, transparent);
+}
+.research-graph-detail > div { display: flex; flex-direction: column; gap: 4px; }
+.research-graph-detail strong { font-size: 11px; font-weight: 500; }
+.research-graph-detail p { margin: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.research-graph-detail i {
+  padding: 3px 5px; border: 1px solid var(--color-border); border-radius: var(--radius);
+  color: var(--color-text-muted); background: var(--color-bg); font-size: 9px; font-style: normal;
+}

@@ -1,0 +1,503 @@
+/* A product-level visual language shared by the project gallery and the
+   in-project conversation workspace. It intentionally stays stable across the
+   legacy app theme so moving from Home into a research session feels like one
+   continuous Science Workbench. */
+.science-home,
+.science-session {
+  --background-base: #f6f8fb;
+  --background-weak: #eef2f7;
+  --background-strong: #ffffff;
+  --background-stronger: #ffffff;
+  --surface-base: #ffffff;
+  --surface-base-hover: #edf5ff;
+  --surface-raised-base: #ffffff;
+  --surface-raised-base-hover: #f7faff;
+  --surface-raised-strong: #ffffff;
+  --surface-raised-strong-hover: #f8fbff;
+  --surface-raised-stronger: #ffffff;
+  --surface-raised-stronger-hover: #f8fbff;
+  --surface-raised-stronger-non-alpha: #ffffff;
+  --surface-strong: #ffffff;
+  --input-base: #ffffff;
+  --input-hover: #ffffff;
+  --input-disabled: #f1f4f8;
+  --border-weaker-base: #e9edf3;
+  --border-weak-base: #e3e8ef;
+  --border-weak-hover: #d7dee8;
+  --border-base: #dce2ea;
+  --border-hover: #cbd4df;
+  --border-strong-base: #bac5d2;
+  --border-selected: #2585d6;
+  --text-strong: #172033;
+  --text-base: #334155;
+  --text-weak: #64748b;
+  --text-weaker: #94a3b8;
+  --text-interactive-base: #1478c9;
+  --surface-brand-base: #2585d6;
+  --surface-brand-hover: #1478c9;
+  --color-bg: #f6f8fb;
+  --color-bg-subtle: #eef2f7;
+  --color-bg-elevated: #e9eef5;
+  --color-surface: #ffffff;
+  --color-surface-solid: #ffffff;
+  --color-border: #dce2ea;
+  --color-border-strong: #bac5d2;
+  --color-text: #172033;
+  --color-text-muted: #64748b;
+  --color-text-faint: #94a3b8;
+  --color-accent: #2585d6;
+  --color-accent-hover: #1478c9;
+  --color-accent-subtle: #e8f3ff;
+  --color-focus: #2585d6;
+  --color-on-accent: #ffffff;
+  --font-family-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-family-serif: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-family-sans);
+  --font-serif: var(--font-family-sans);
+  color-scheme: light;
+  color: #172033;
+  background: #f6f8fb;
+  font-family: var(--font-family-sans);
+}
+
+.science-home :is(h1, h2, h3, h4, h5, h6),
+.science-session :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-family-sans);
+}
+
+.science-home .science-sidebar,
+.science-session .workflow-sidebar {
+  background: #ffffff;
+  border-color: #dce2ea;
+  box-shadow: 4px 0 18px rgba(34, 54, 82, 0.025);
+}
+
+.science-session > .g-strip,
+.dark .science-session > .g-strip,
+html[data-color-scheme="dark"] .science-session > .g-strip {
+  min-height: 76px;
+  box-sizing: border-box;
+  padding: 0 24px !important;
+  gap: 14px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: #dce2ea;
+  box-shadow: 0 1px 8px rgba(34, 54, 82, 0.035);
+  backdrop-filter: blur(16px);
+}
+
+.science-session > .g-strip > button:first-child {
+  height: 34px;
+  padding: 0 10px !important;
+  border: 1px solid #e3e8ef !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #64748b !important;
+}
+
+.science-session > .g-strip button[title="command palette"],
+.science-session > .g-strip button[title="help"],
+.science-session > .g-strip button[title="settings"],
+.science-session > .g-strip button[title="toggle theme"] {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  border-color: #dce2ea !important;
+  background: #ffffff !important;
+  color: #64748b !important;
+}
+
+.science-session .workflow-sidebar {
+  width: 300px;
+  flex-basis: 300px;
+}
+
+.science-session .workflow-sidebar > header {
+  padding: 22px 20px 18px;
+  background: linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+}
+
+.science-session .workflow-sidebar > header > span {
+  color: #2585d6;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.science-session .workflow-sidebar > header h2 {
+  margin: 8px 0 12px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.science-session .workflow-list {
+  padding: 14px 12px 6px;
+}
+
+.science-session .workflow-node {
+  min-height: 66px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  grid-template-columns: 31px minmax(0, 1fr) 16px;
+  gap: 9px;
+}
+
+.science-session .workflow-node.active {
+  background: #edf6ff;
+  box-shadow:
+    inset 0 0 0 1px #cfe7fb,
+    0 3px 10px rgba(37, 133, 214, 0.06);
+}
+
+.science-session .workflow-marker {
+  width: 27px;
+  height: 27px;
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.science-session .workflow-node.active .workflow-marker {
+  border-color: #2585d6;
+  background: #2585d6;
+  box-shadow: 0 0 0 4px #e3f2ff;
+}
+
+.science-session .workflow-copy strong {
+  color: #243047;
+  font-size: 12px;
+}
+
+.science-session .workflow-copy small {
+  color: #8795a8;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.science-session .workflow-line {
+  left: 31px;
+  top: 47px;
+  height: 34px;
+  background: #dce4ed;
+}
+
+.science-session .workflow-new {
+  height: 36px;
+  border-color: #bcd9f1;
+  background: #f7fbff;
+  font-size: 11px;
+}
+
+.science-session .atlas-chat-scroll,
+.science-session .session-scroller {
+  background: #f6f8fb;
+}
+
+.science-session [role="tab"] {
+  border-radius: 7px !important;
+}
+
+.science-session [role="tab"][aria-selected="true"] {
+  color: #1478c9 !important;
+  background: #edf6ff !important;
+  border-color: #cfe7fb !important;
+}
+
+.science-session [data-component="prompt-input"] {
+  color: #172033 !important;
+}
+
+.science-session form[class*="group/prompt-input"] {
+  border: 1px solid #d8e0ea !important;
+  border-radius: 22px !important;
+  background: #ffffff !important;
+  box-shadow:
+    0 8px 24px rgba(40, 67, 101, 0.08),
+    0 1px 3px rgba(40, 67, 101, 0.05) !important;
+}
+
+.science-session form[class*="group/prompt-input"]:focus-within {
+  border-color: #7fb9e9;
+  box-shadow:
+    0 0 0 3px #e5f3ff,
+    0 10px 28px rgba(40, 67, 101, 0.1) !important;
+}
+
+.science-session [data-component="prompt-input"] {
+  min-height: 64px;
+  padding: 16px 52px 10px 16px !important;
+  font-family: var(--font-family-sans) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+.science-session form[class*="group/prompt-input"] > div:last-child {
+  padding: 6px 10px 10px !important;
+}
+
+.science-session [data-slot="prompt-controls"] [data-component="button"][data-variant="ghost"] {
+  border-radius: 7px;
+  background: #f7f9fc;
+  box-shadow: inset 0 0 0 1px #e3e8ef;
+  color: #475569;
+}
+
+/* scienceos dark palette. The workbench previously forced light tokens,
+   which left the home and conversation surfaces white in dark mode. */
+:is(.dark, html[data-color-scheme="dark"]) :is(.science-home, .science-session) {
+  --background-base: #11151c;
+  --background-weak: #171c25;
+  --background-strong: #1b212b;
+  --background-stronger: #1d2430;
+  --surface-base: #171c24;
+  --surface-base-hover: #202a37;
+  --surface-raised-base: #1c222c;
+  --surface-raised-base-hover: #252d39;
+  --surface-raised-strong: #202732;
+  --surface-raised-strong-hover: #293240;
+  --surface-raised-stronger: #222a36;
+  --surface-raised-stronger-hover: #2a3442;
+  --surface-raised-stronger-non-alpha: #1b222c;
+  --surface-strong: #202732;
+  --input-base: #1b222c;
+  --input-hover: #222b37;
+  --input-disabled: #151a21;
+  --border-weaker-base: #252d39;
+  --border-weak-base: #2b3543;
+  --border-weak-hover: #364354;
+  --border-base: #344052;
+  --border-hover: #46556a;
+  --border-strong-base: #536278;
+  --border-selected: #5aa9ec;
+  --text-strong: #f1f5f9;
+  --text-base: #d6deea;
+  --text-weak: #9ba9ba;
+  --text-weaker: #728196;
+  --text-interactive-base: #69b5f3;
+  --surface-brand-base: #318bd5;
+  --surface-brand-hover: #50a5e8;
+  --color-bg: #11151c;
+  --color-bg-subtle: #171c25;
+  --color-bg-elevated: #202733;
+  --color-surface: #181e27;
+  --color-surface-solid: #1b222c;
+  --color-border: #303a49;
+  --color-border-strong: #4a586d;
+  --color-text: #f1f5f9;
+  --color-text-muted: #a7b3c3;
+  --color-text-faint: #748297;
+  --color-accent: #60aef0;
+  --color-accent-hover: #7bbdf3;
+  --color-accent-subtle: #172d42;
+  --color-focus: #60aef0;
+  --color-on-accent: #ffffff;
+  color-scheme: dark;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+:is(.dark, html[data-color-scheme="dark"]) :is(.science-home .science-sidebar, .science-session .workflow-sidebar) {
+  background: var(--color-surface-solid);
+  border-color: var(--color-border);
+  box-shadow: 4px 0 18px rgba(0, 0, 0, 0.14);
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session > .g-strip {
+  background: color-mix(in srgb, var(--color-surface-solid) 94%, transparent) !important;
+  border-color: var(--color-border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session > .g-strip > button:first-child,
+:is(.dark, html[data-color-scheme="dark"]) .science-session > .g-strip button[title="command palette"],
+:is(.dark, html[data-color-scheme="dark"]) .science-session > .g-strip button[title="help"],
+:is(.dark, html[data-color-scheme="dark"]) .science-session > .g-strip button[title="settings"],
+:is(.dark, html[data-color-scheme="dark"]) .science-session > .g-strip button[title="toggle theme"] {
+  background: var(--color-surface-solid) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-muted) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-sidebar > header {
+  background: linear-gradient(180deg, #1d2530 0%, var(--color-surface-solid) 100%);
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-node.active {
+  background: #172c40;
+  box-shadow: inset 0 0 0 1px #285477, 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-copy strong {
+  color: #e7edf5;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-copy small {
+  color: #8493a6;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-line {
+  background: #344052;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-new {
+  border-color: #355f7e;
+  background: #172733;
+  color: #b8d9f2;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-complete {
+  border-color: #355f7e;
+  background: #172733;
+  color: #8bc8f4;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-complete:hover {
+  background: #1c3448;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session [role="tab"][aria-selected="true"] {
+  color: #8bc8f4 !important;
+  background: #172c40 !important;
+  border-color: #285477 !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-marker {
+  background: #202833;
+  border-color: #46556a;
+  color: #a7b3c3;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-node.active .workflow-marker {
+  background: #318bd5;
+  border-color: #60aef0;
+  box-shadow: 0 0 0 4px #172d42;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session :is(.atlas-chat-scroll, .session-scroller, .bg-background-stronger, .bg-background-base) {
+  background-color: var(--color-bg) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session [class*="bg-gradient-to-t"] {
+  background-image: linear-gradient(to top, var(--color-bg) 0%, var(--color-bg) 48%, transparent) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session form[class*="group/prompt-input"] {
+  border-color: var(--color-border) !important;
+  background: var(--color-surface-solid) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session form[class*="group/prompt-input"]:focus-within {
+  border-color: #4d94cd !important;
+  box-shadow: 0 0 0 3px rgba(72, 153, 218, 0.16), 0 12px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session :is(.text-text-strong, [data-component="prompt-input"]) {
+  color: var(--color-text) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .text-text-base {
+  color: var(--color-text-base, #d6deea) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .text-text-weak {
+  color: var(--color-text-muted) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session [data-slot="prompt-controls"] [data-component="button"][data-variant="ghost"] {
+  background: #222a35;
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.science-session .bg-background-stronger,
+.science-session .bg-background-base {
+  background-color: #f6f8fb !important;
+}
+
+.science-session [class*="bg-gradient-to-t"] {
+  background-image: linear-gradient(to top, #f6f8fb 0%, #f6f8fb 48%, rgba(246, 248, 251, 0)) !important;
+}
+
+.science-session .text-text-strong {
+  color: #172033 !important;
+}
+
+.science-session .text-text-base {
+  color: #334155 !important;
+}
+
+.science-session .text-text-weak {
+  color: #64748b !important;
+}
+
+.science-session aside[aria-label="right pane"],
+.science-session [data-component="right-pane"] {
+  background: #ffffff;
+  border-color: #dce2ea;
+}
+
+@media (max-width: 900px) {
+  .science-session .workflow-sidebar {
+    width: 250px;
+    flex-basis: 250px;
+  }
+
+  .science-home .science-brand .atlas-wordmark span {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .science-session .workflow-sidebar {
+    display: flex;
+    width: 210px;
+    flex-basis: 210px;
+  }
+
+  .science-session .workflow-sidebar > header {
+    padding: 16px 14px 14px;
+  }
+
+  .science-session .workflow-sidebar > header h2 {
+    font-size: 14px;
+  }
+
+  .science-session .workflow-list {
+    padding-inline: 8px;
+  }
+
+  .science-session .workflow-node {
+    min-height: 59px;
+    padding-inline: 7px;
+  }
+
+  .science-session .workflow-copy small {
+    display: none;
+  }
+}
+
+/* Keep these terminal overrides after the light compatibility rules above. */
+:is(.dark, html[data-color-scheme="dark"]) .science-session :is(.atlas-chat-scroll, .session-scroller, .bg-background-stronger, .bg-background-base) {
+  background-color: var(--color-bg) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session [class*="bg-gradient-to-t"] {
+  background-image: linear-gradient(to top, var(--color-bg) 0%, var(--color-bg) 48%, transparent) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session :is(.text-text-strong, [data-component="prompt-input"]) {
+  color: var(--color-text) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .text-text-base {
+  color: #d6deea !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session .text-text-weak {
+  color: var(--color-text-muted) !important;
+}
+
+:is(.dark, html[data-color-scheme="dark"]) .science-session :is(aside[aria-label="right pane"], [data-component="right-pane"]) {
+  background: var(--color-surface-solid);
+  border-color: var(--color-border);
+}
