@@ -1,5 +1,5 @@
-import * as OAuth from "@modelcontextprotocol/sdk/client/auth.js"
 import type { OAuthClientProvider } from "@modelcontextprotocol/sdk/client/auth.js"
+import { createRequire } from "node:module"
 import type {
   OAuthClientMetadata,
   OAuthTokens,
@@ -10,6 +10,9 @@ import { McpAuth } from "./auth"
 import { Log } from "../util/log"
 
 const log = Log.create({ service: "mcp.oauth" })
+const OAuth = createRequire(import.meta.url)(
+  "@modelcontextprotocol/sdk/client/auth.js",
+) as typeof import("@modelcontextprotocol/sdk/client/auth.js")
 
 // Single-flight token refresh per server. Servers that rotate the refresh
 // token invalidate the old one on every refresh, so two concurrent refreshes
