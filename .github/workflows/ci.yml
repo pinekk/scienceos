@@ -41,8 +41,8 @@ jobs:
       - uses: ./.github/actions/setup-bun
       - name: Configure git for tests
         run: |
-          git config --global user.email "ci@openscience.dev"
-          git config --global user.name "OpenScience CI"
+          git config --global user.email "ci@scienceos.local"
+          git config --global user.name "ScienceOS CI"
           git config --global init.defaultBranch main
       - run: bun run --cwd backend/cli test
 

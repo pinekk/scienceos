@@ -299,15 +299,11 @@ const SkillListCommand = cmd({
         UI.println("")
 
         if (totalBundled === 0) {
-          UI.println(
-            "Bundled scienceos skills did not load. Restart scienceos and try again.",
-          )
+          UI.println("Bundled scienceos skills did not load. Restart scienceos and try again.")
           UI.println("Offline fallback only shows skills already cached on this machine.")
           UI.println("")
         } else if (totalBundled < 100) {
-          UI.println(
-            "Only a small bundled Skill set is visible; the full scienceos Skill index was not loaded.",
-          )
+          UI.println("Only a small bundled Skill set is visible; the full scienceos Skill index was not loaded.")
           UI.println("Run `openscience sync` or try again once online/authenticated.")
           UI.println("")
         } else if (!showAll) {

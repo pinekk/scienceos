@@ -323,7 +323,9 @@ html[data-color-scheme="dark"] .science-session > .g-strip {
 
 :is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-node.active {
   background: #172c40;
-  box-shadow: inset 0 0 0 1px #285477, 0 3px 10px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    inset 0 0 0 1px #285477,
+    0 3px 10px rgba(0, 0, 0, 0.18);
 }
 
 :is(.dark, html[data-color-scheme="dark"]) .science-session .workflow-copy strong {
@@ -372,7 +374,9 @@ html[data-color-scheme="dark"] .science-session > .g-strip {
   box-shadow: 0 0 0 4px #172d42;
 }
 
-:is(.dark, html[data-color-scheme="dark"]) .science-session :is(.atlas-chat-scroll, .session-scroller, .bg-background-stronger, .bg-background-base) {
+:is(.dark, html[data-color-scheme="dark"])
+  .science-session
+  :is(.atlas-chat-scroll, .session-scroller, .bg-background-stronger, .bg-background-base) {
   background-color: var(--color-bg) !important;
 }
 
@@ -383,12 +387,16 @@ html[data-color-scheme="dark"] .science-session > .g-strip {
 :is(.dark, html[data-color-scheme="dark"]) .science-session form[class*="group/prompt-input"] {
   border-color: var(--color-border) !important;
   background: var(--color-surface-solid) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.28),
+    0 1px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
 :is(.dark, html[data-color-scheme="dark"]) .science-session form[class*="group/prompt-input"]:focus-within {
   border-color: #4d94cd !important;
-  box-shadow: 0 0 0 3px rgba(72, 153, 218, 0.16), 0 12px 32px rgba(0, 0, 0, 0.3) !important;
+  box-shadow:
+    0 0 0 3px rgba(72, 153, 218, 0.16),
+    0 12px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
 :is(.dark, html[data-color-scheme="dark"]) .science-session :is(.text-text-strong, [data-component="prompt-input"]) {
@@ -403,7 +411,10 @@ html[data-color-scheme="dark"] .science-session > .g-strip {
   color: var(--color-text-muted) !important;
 }
 
-:is(.dark, html[data-color-scheme="dark"]) .science-session [data-slot="prompt-controls"] [data-component="button"][data-variant="ghost"] {
+:is(.dark, html[data-color-scheme="dark"])
+  .science-session
+  [data-slot="prompt-controls"]
+  [data-component="button"][data-variant="ghost"] {
   background: #222a35;
   box-shadow: inset 0 0 0 1px var(--color-border);
   color: var(--color-text-muted);
@@ -477,7 +488,9 @@ html[data-color-scheme="dark"] .science-session > .g-strip {
 }
 
 /* Keep these terminal overrides after the light compatibility rules above. */
-:is(.dark, html[data-color-scheme="dark"]) .science-session :is(.atlas-chat-scroll, .session-scroller, .bg-background-stronger, .bg-background-base) {
+:is(.dark, html[data-color-scheme="dark"])
+  .science-session
+  :is(.atlas-chat-scroll, .session-scroller, .bg-background-stronger, .bg-background-base) {
   background-color: var(--color-bg) !important;
 }
 
@@ -497,7 +510,9 @@ html[data-color-scheme="dark"] .science-session > .g-strip {
   color: var(--color-text-muted) !important;
 }
 
-:is(.dark, html[data-color-scheme="dark"]) .science-session :is(aside[aria-label="right pane"], [data-component="right-pane"]) {
+:is(.dark, html[data-color-scheme="dark"])
+  .science-session
+  :is(aside[aria-label="right pane"], [data-component="right-pane"]) {
   background: var(--color-surface-solid);
   border-color: var(--color-border);
 }

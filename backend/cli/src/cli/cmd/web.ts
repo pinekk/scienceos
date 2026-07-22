@@ -39,10 +39,7 @@ async function announceFdaIfNeeded() {
   UI.empty()
   UI.println(UI.Style.TEXT_WARNING_BOLD + "  ⚠  Full Disk Access required", UI.Style.TEXT_NORMAL)
   UI.empty()
-  UI.println(
-    UI.Style.TEXT_NORMAL,
-    "  macOS is blocking scienceos from listing ~/Desktop, ~/Documents and ~/Downloads.",
-  )
+  UI.println(UI.Style.TEXT_NORMAL, "  macOS is blocking scienceos from listing ~/Desktop, ~/Documents and ~/Downloads.")
   UI.println(UI.Style.TEXT_NORMAL, "  Without Full Disk Access the folder picker and file tree will be empty.")
   UI.empty()
   UI.println(UI.Style.TEXT_INFO_BOLD + "  Grant access:", UI.Style.TEXT_NORMAL)
@@ -103,10 +100,7 @@ export const WebCommand = cmd({
       // badger those users to connect Atlas.
       if (!(await isConfigured())) {
         UI.println(UI.Style.TEXT_WARNING_BOLD + "  ⚠  No model configured", UI.Style.TEXT_NORMAL)
-        UI.println(
-          UI.Style.TEXT_NORMAL,
-          "  Sign in from the scienceos login page to configure the model service.",
-        )
+        UI.println(UI.Style.TEXT_NORMAL, "  Sign in from the scienceos login page to configure the model service.")
         UI.println(UI.Style.TEXT_DIM, "  Continuing with free demo models for now.")
         UI.empty()
       }

@@ -124,61 +124,61 @@ export function AppInterface(props: { defaultUrl?: string }) {
           <GlobalSDKProvider>
             <GlobalSyncProvider>
               <Router
-              root={(props) => (
-                <SettingsProvider>
-                  <PermissionProvider>
-                    <LayoutProvider>
-                      <NotificationProvider>
-                        <ModelsProvider>
-                          <CommandProvider>
-                            <HighlightsProvider>
-                              <Layout>{props.children}</Layout>
-                            </HighlightsProvider>
-                          </CommandProvider>
-                        </ModelsProvider>
-                      </NotificationProvider>
-                    </LayoutProvider>
-                  </PermissionProvider>
-                </SettingsProvider>
-              )}
-            >
-              <Route
-                path="/"
-                component={() => (
-                  <Suspense fallback={<Loading />}>
-                    <Home />
-                  </Suspense>
+                root={(props) => (
+                  <SettingsProvider>
+                    <PermissionProvider>
+                      <LayoutProvider>
+                        <NotificationProvider>
+                          <ModelsProvider>
+                            <CommandProvider>
+                              <HighlightsProvider>
+                                <Layout>{props.children}</Layout>
+                              </HighlightsProvider>
+                            </CommandProvider>
+                          </ModelsProvider>
+                        </NotificationProvider>
+                      </LayoutProvider>
+                    </PermissionProvider>
+                  </SettingsProvider>
                 )}
-              />
-              <Route path="/:dir" component={DirectoryLayout}>
-                <Route path="/" component={() => <Navigate href="session" />} />
+              >
                 <Route
-                  path="/studio"
+                  path="/"
                   component={() => (
                     <Suspense fallback={<Loading />}>
-                      <Studio />
+                      <Home />
                     </Suspense>
                   )}
                 />
-                <Route
-                  path="/session/:id?"
-                  component={(p) => (
-                    <Show when={p.params.id ?? "new"}>
-                      <TerminalProvider>
-                        <FileProvider>
-                          <PromptProvider>
-                            <CommentsProvider>
-                              <Suspense fallback={<Loading />}>
-                                <Session />
-                              </Suspense>
-                            </CommentsProvider>
-                          </PromptProvider>
-                        </FileProvider>
-                      </TerminalProvider>
-                    </Show>
-                  )}
-                />
-              </Route>
+                <Route path="/:dir" component={DirectoryLayout}>
+                  <Route path="/" component={() => <Navigate href="session" />} />
+                  <Route
+                    path="/studio"
+                    component={() => (
+                      <Suspense fallback={<Loading />}>
+                        <Studio />
+                      </Suspense>
+                    )}
+                  />
+                  <Route
+                    path="/session/:id?"
+                    component={(p) => (
+                      <Show when={p.params.id ?? "new"}>
+                        <TerminalProvider>
+                          <FileProvider>
+                            <PromptProvider>
+                              <CommentsProvider>
+                                <Suspense fallback={<Loading />}>
+                                  <Session />
+                                </Suspense>
+                              </CommentsProvider>
+                            </PromptProvider>
+                          </FileProvider>
+                        </TerminalProvider>
+                      </Show>
+                    )}
+                  />
+                </Route>
               </Router>
             </GlobalSyncProvider>
           </GlobalSDKProvider>

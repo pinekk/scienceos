@@ -443,7 +443,8 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
   })
 
   type AtOption =
-    { type: "agent"; name: string; display: string } | { type: "file"; path: string; display: string; recent?: boolean }
+    | { type: "agent"; name: string; display: string }
+    | { type: "file"; path: string; display: string; recent?: boolean }
 
   const agentList = createMemo(() =>
     sync.data.agent

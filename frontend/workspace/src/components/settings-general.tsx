@@ -313,7 +313,6 @@ export const AppearanceSections: Component = () => {
           </SettingsRow>
         </div>
       </div>
-
     </div>
   )
 }

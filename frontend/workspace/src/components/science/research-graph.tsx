@@ -24,18 +24,22 @@ export function ResearchGraph(): JSX.Element {
     return chinese() ? "待开始" : "Pending"
   }
   const select = (id: string) =>
-    workflow.select(id).catch((error) =>
-      toast.error(
-        language.t("science.workflow.switchFailed"),
-        error instanceof Error ? error.message : String(error),
-      ),
-    )
+    workflow
+      .select(id)
+      .catch((error) =>
+        toast.error(
+          language.t("science.workflow.switchFailed"),
+          error instanceof Error ? error.message : String(error),
+        ),
+      )
 
   return (
     <section class="research-graph">
       <header class="research-graph-summary">
         <div class="research-graph-heading">
-          <span class="research-graph-icon"><IconNetwork size={15} /></span>
+          <span class="research-graph-icon">
+            <IconNetwork size={15} />
+          </span>
           <div>
             <small>{chinese() ? "本地研究项目" : "Local research project"}</small>
             <strong title={title()}>{title()}</strong>
@@ -45,7 +49,9 @@ export function ResearchGraph(): JSX.Element {
         <Show when={goal()}>{(value) => <p>{value()}</p>}</Show>
         <div class="research-graph-progress-copy">
           <span>{chinese() ? "研究进度" : "Research progress"}</span>
-          <b>{done()} / {stages().length} · {progress()}%</b>
+          <b>
+            {done()} / {stages().length} · {progress()}%
+          </b>
         </div>
         <div class="research-graph-progress" aria-label={`${progress()}%`}>
           <span style={{ width: `${progress()}%` }} />
@@ -68,7 +74,9 @@ export function ResearchGraph(): JSX.Element {
               const selected = () => workflow.current()?.id === stage.id
               return (
                 <div class="research-graph-branch">
-                  <Show when={index() > 0}><i class="research-graph-edge" /></Show>
+                  <Show when={index() > 0}>
+                    <i class="research-graph-edge" />
+                  </Show>
                   <button
                     classList={{
                       "research-graph-node": true,
@@ -99,16 +107,34 @@ export function ResearchGraph(): JSX.Element {
                   <Show when={selected()}>
                     <div class="research-graph-detail">
                       <Show when={stage.specialist}>
-                        <div><span>{language.t("science.workflow.specialist")}</span><strong>{stage.specialist}</strong></div>
+                        <div>
+                          <span>{language.t("science.workflow.specialist")}</span>
+                          <strong>{stage.specialist}</strong>
+                        </div>
                       </Show>
                       <Show when={stage.skills?.length}>
-                        <div><span>{language.t("science.workflow.skills")}</span><p><For each={stage.skills}>{(item) => <i>{item}</i>}</For></p></div>
+                        <div>
+                          <span>{language.t("science.workflow.skills")}</span>
+                          <p>
+                            <For each={stage.skills}>{(item) => <i>{item}</i>}</For>
+                          </p>
+                        </div>
                       </Show>
                       <Show when={stage.validators?.length}>
-                        <div><span>{language.t("science.workflow.validators")}</span><p><For each={stage.validators}>{(item) => <i>{item}</i>}</For></p></div>
+                        <div>
+                          <span>{language.t("science.workflow.validators")}</span>
+                          <p>
+                            <For each={stage.validators}>{(item) => <i>{item}</i>}</For>
+                          </p>
+                        </div>
                       </Show>
                       <Show when={stage.artifacts?.length}>
-                        <div><span>{language.t("science.workflow.artifacts")}</span><p><For each={stage.artifacts}>{(item) => <i>{item}</i>}</For></p></div>
+                        <div>
+                          <span>{language.t("science.workflow.artifacts")}</span>
+                          <p>
+                            <For each={stage.artifacts}>{(item) => <i>{item}</i>}</For>
+                          </p>
+                        </div>
                       </Show>
                     </div>
                   </Show>

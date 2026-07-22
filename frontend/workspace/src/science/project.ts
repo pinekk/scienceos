@@ -243,12 +243,7 @@ export function stageSystem(stage: ScienceStage) {
   ].join("\n")
 }
 
-export function buildProjectFiles(input: {
-  name: string
-  goal: string
-  pack: DomainPackID
-  stages?: ScienceStage[]
-}) {
+export function buildProjectFiles(input: { name: string; goal: string; pack: DomainPackID; stages?: ScienceStage[] }) {
   const now = new Date().toISOString()
   const stages = input.stages?.length ? input.stages : generateStages(input.pack)
   const project: ScienceProject = {

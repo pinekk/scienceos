@@ -88,7 +88,14 @@ export default function Memory() {
   }
 
   function clearAll() {
-    if (!window.confirm(text(`Clear all ${scope() === "global" ? "global" : "project"} memory? This cannot be undone.`, `清空所有${scope() === "global" ? "全局" : "当前项目"}记忆？此操作无法撤销。`)))
+    if (
+      !window.confirm(
+        text(
+          `Clear all ${scope() === "global" ? "global" : "project"} memory? This cannot be undone.`,
+          `清空所有${scope() === "global" ? "全局" : "当前项目"}记忆？此操作无法撤销。`,
+        ),
+      )
+    )
       return
     void persist({ enabled: doc().enabled, categories: [] })
   }
@@ -200,7 +207,10 @@ export default function Memory() {
           </div>
         </div>
 
-        <Show when={!loading()} fallback={<div class="text-13-regular text-text-weak py-6 text-center">{text("Loading…", "加载中…")}</div>}>
+        <Show
+          when={!loading()}
+          fallback={<div class="text-13-regular text-text-weak py-6 text-center">{text("Loading…", "加载中…")}</div>}
+        >
           {/* Categories */}
           <div class="flex flex-col gap-4">
             <For each={doc().categories}>
@@ -221,7 +231,11 @@ export default function Memory() {
                   <div class="flex flex-col">
                     <For
                       each={category.notes}
-                      fallback={<span class="px-4 py-3 text-12-regular text-text-weak/70">{text("No notes yet.", "暂无笔记。")}</span>}
+                      fallback={
+                        <span class="px-4 py-3 text-12-regular text-text-weak/70">
+                          {text("No notes yet.", "暂无笔记。")}
+                        </span>
+                      }
                     >
                       {(note) => (
                         <div class="group flex items-start gap-2 px-4 py-2.5 border-b border-border-weak-base/60 last:border-b-0">

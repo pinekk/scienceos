@@ -467,16 +467,19 @@ export const Credentials: Component = () => {
           >
             <div class="flex flex-col gap-0.5 min-w-0">
               <span class="text-13-medium text-text-base">工作台账号</span>
-              <span class="text-12-regular text-text-weak">
-                使用产品账号登录，并在本机安全保留登录状态。
-              </span>
+              <span class="text-12-regular text-text-weak">使用产品账号登录，并在本机安全保留登录状态。</span>
             </div>
             <div class="flex items-center gap-2 shrink-0">
               <Show when={xiaohuConnected()}>
                 <StatusDot status="active" size={8} />
                 <span class="text-12-regular text-text-weak">已连接</span>
               </Show>
-              <Button type="button" size="small" variant={xiaohuConnected() ? "secondary" : "primary"} onClick={() => openSetupDialog(dialog)}>
+              <Button
+                type="button"
+                size="small"
+                variant={xiaohuConnected() ? "secondary" : "primary"}
+                onClick={() => openSetupDialog(dialog)}
+              >
                 {xiaohuConnected() ? "重新登录" : "账号登录"}
               </Button>
             </div>

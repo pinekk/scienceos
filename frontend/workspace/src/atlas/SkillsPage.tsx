@@ -198,7 +198,8 @@ export default function SkillsPage(): JSX.Element {
                 width: "100%",
               }}
             >
-              智能体按需加载的专业工作流。当前阶段的优先 Skill 会在下一轮专业对话前被优先调用；关闭某项 Skill 会使所有智能体无法调用它。
+              智能体按需加载的专业工作流。当前阶段的优先 Skill 会在下一轮专业对话前被优先调用；关闭某项 Skill
+              会使所有智能体无法调用它。
             </p>
             <div
               style={{
@@ -270,7 +271,11 @@ export default function SkillsPage(): JSX.Element {
                       background: "var(--color-bg-subtle)",
                     }}
                   >
-                    <ScopeButton active={activeScope() === "stage"} disabled={!stageReady()} onClick={() => setScope("stage")}>
+                    <ScopeButton
+                      active={activeScope() === "stage"}
+                      disabled={!stageReady()}
+                      onClick={() => setScope("stage")}
+                    >
                       本阶段优先 Skill {stageReady() ? `(${priority().size})` : ""}
                     </ScopeButton>
                     <ScopeButton active={activeScope() === "all"} onClick={() => setScope("all")}>
@@ -490,7 +495,12 @@ export default function SkillsPage(): JSX.Element {
   }
 }
 
-function ScopeButton(props: { active: boolean; disabled?: boolean; onClick: () => void; children: JSX.Element }): JSX.Element {
+function ScopeButton(props: {
+  active: boolean
+  disabled?: boolean
+  onClick: () => void
+  children: JSX.Element
+}): JSX.Element {
   return (
     <button
       type="button"

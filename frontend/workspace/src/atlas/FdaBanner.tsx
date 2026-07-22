@@ -196,7 +196,9 @@ function FdaSheet(props: {
           >
             <li>Open Privacy &amp; Security → Full Disk Access</li>
             <li>Enable the terminal application you use to start scienceos</li>
-            <li>If it is missing, click <strong>+</strong> and select that terminal application</li>
+            <li>
+              If it is missing, click <strong>+</strong> and select that terminal application
+            </li>
             <li>Restart scienceos (kill + relaunch) — recheck below</li>
           </ol>
         </Show>

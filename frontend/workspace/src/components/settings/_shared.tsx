@@ -85,15 +85,17 @@ export const Row: ParentComponent<{ onClick?: () => void }> = (props) => (
 
 export const EmptyState: Component<{ icon: IconProps["name"]; title: string; hint?: string }> = (props) => {
   const copy = useSettingsCopy()
-  return <div class="flex flex-col items-center gap-3 text-center py-14">
-    <div class="flex items-center justify-center size-11 rounded-[4px] border border-border-weak-base bg-surface-base/40 text-icon-weak-base">
-      <Icon name={props.icon} size="normal" />
+  return (
+    <div class="flex flex-col items-center gap-3 text-center py-14">
+      <div class="flex items-center justify-center size-11 rounded-[4px] border border-border-weak-base bg-surface-base/40 text-icon-weak-base">
+        <Icon name={props.icon} size="normal" />
+      </div>
+      <span class="text-14-medium text-text-strong">{copy(props.title)}</span>
+      <Show when={props.hint}>
+        <p class="text-12-regular text-text-weak leading-relaxed max-w-[380px]">{copy(props.hint!)}</p>
+      </Show>
     </div>
-    <span class="text-14-medium text-text-strong">{copy(props.title)}</span>
-    <Show when={props.hint}>
-      <p class="text-12-regular text-text-weak leading-relaxed max-w-[380px]">{copy(props.hint!)}</p>
-    </Show>
-  </div>
+  )
 }
 
 // ── Toolbar pieces ──────────────────────────────────────────────────────────
@@ -105,24 +107,26 @@ export const SearchInput: Component<{ value: string; onInput: (v: string) => voi
   props,
 ) => {
   const copy = useSettingsCopy()
-  return <label class={`${controlBase} flex-1 min-w-[140px] focus-within:border-border-strong-base cursor-text`}>
-    <Icon name="magnifying-glass" size="small" class="text-icon-weak-base flex-shrink-0" />
-    <input
-      type="text"
-      value={props.value}
-      placeholder={copy(props.placeholder ?? "Search")}
-      spellcheck={false}
-      autocapitalize="off"
-      autocomplete="off"
-      class="flex-1 bg-transparent outline-none text-text-strong placeholder:text-text-weak/60"
-      onInput={(e) => props.onInput(e.currentTarget.value)}
-    />
-    <Show when={props.value}>
-      <button type="button" class="text-icon-weak-base hover:text-text-strong" onClick={() => props.onInput("")}>
-        <Icon name="circle-x" size="small" />
-      </button>
-    </Show>
-  </label>
+  return (
+    <label class={`${controlBase} flex-1 min-w-[140px] focus-within:border-border-strong-base cursor-text`}>
+      <Icon name="magnifying-glass" size="small" class="text-icon-weak-base flex-shrink-0" />
+      <input
+        type="text"
+        value={props.value}
+        placeholder={copy(props.placeholder ?? "Search")}
+        spellcheck={false}
+        autocapitalize="off"
+        autocomplete="off"
+        class="flex-1 bg-transparent outline-none text-text-strong placeholder:text-text-weak/60"
+        onInput={(e) => props.onInput(e.currentTarget.value)}
+      />
+      <Show when={props.value}>
+        <button type="button" class="text-icon-weak-base hover:text-text-strong" onClick={() => props.onInput("")}>
+          <Icon name="circle-x" size="small" />
+        </button>
+      </Show>
+    </label>
+  )
 }
 
 export interface FilterOption {

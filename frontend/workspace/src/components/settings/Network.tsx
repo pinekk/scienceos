@@ -150,14 +150,20 @@ export default function Network() {
             <span class="text-13-medium text-text-strong">{text("Enforce allow-list", "强制使用允许列表")}</span>
             <span class="text-12-regular text-text-weak">
               {state().allowlistEnabled
-                ? text(`Only the ${effectiveCount()} allowed domains below are reachable.`, `仅可访问下方 ${effectiveCount()} 个允许域名。`)
+                ? text(
+                    `Only the ${effectiveCount()} allowed domains below are reachable.`,
+                    `仅可访问下方 ${effectiveCount()} 个允许域名。`,
+                  )
                 : text("Advisory only — the agent may reach any domain.", "当前仅作提示，智能体可以访问任意域名。")}
             </span>
           </div>
           <Switch checked={state().allowlistEnabled} onChange={toggleAllowlist} />
         </div>
 
-        <Show when={!loading()} fallback={<div class="text-13-regular text-text-weak py-6 text-center">{text("Loading…", "加载中…")}</div>}>
+        <Show
+          when={!loading()}
+          fallback={<div class="text-13-regular text-text-weak py-6 text-center">{text("Loading…", "加载中…")}</div>}
+        >
           {/* Domain groups */}
           <div class="flex flex-col gap-2">
             <span class="atlas-section-label px-1">{text("Domain sets", "预设域名组")}</span>
@@ -177,9 +183,12 @@ export default function Network() {
                         <Icon name={open() ? "chevron-down" : "chevron-right"} size="small" />
                       </button>
                       <div class="flex flex-col gap-0.5 min-w-0 flex-1">
-                        <span class="text-13-medium text-text-strong truncate">{chinese() ? groupText(group).label : group.label}</span>
+                        <span class="text-13-medium text-text-strong truncate">
+                          {chinese() ? groupText(group).label : group.label}
+                        </span>
                         <span class="text-12-regular text-text-weak truncate">
-                          {chinese() ? groupText(group).description : group.description} · {group.domains.length} {text("domains", "个域名")}
+                          {chinese() ? groupText(group).description : group.description} · {group.domains.length}{" "}
+                          {text("domains", "个域名")}
                         </span>
                       </div>
                       <Switch checked={on()} onChange={(v) => toggleGroup(group.id, v)} />
@@ -219,7 +228,11 @@ export default function Network() {
             <div class="rounded-[4px] border border-border-weak-base bg-surface-base/40 overflow-hidden">
               <For
                 each={state().custom}
-                fallback={<span class="block px-4 py-3 text-12-regular text-text-weak/70">{text("No custom domains.", "暂无自定义域名。")}</span>}
+                fallback={
+                  <span class="block px-4 py-3 text-12-regular text-text-weak/70">
+                    {text("No custom domains.", "暂无自定义域名。")}
+                  </span>
+                }
               >
                 {(domain) => (
                   <div class="group flex items-center gap-2 px-4 py-2.5 border-b border-border-weak-base/60 last:border-b-0">

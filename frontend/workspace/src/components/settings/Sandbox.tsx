@@ -60,8 +60,13 @@ const Sandbox: Component = () => {
   const language = useLanguage()
   const chinese = () => language.locale() === "zh" || language.locale() === "zht"
   const text = (en: string, cn: string) => (chinese() ? cn : en)
-  const networkOptions = () => NETWORK_OPTS.map((item) => ({ ...item, label: text(item.label, item.value === "allow" ? "允许" : "禁止") }))
-  const fallbackOptions = () => UNAVAILABLE_OPTS.map((item) => ({ ...item, label: text(item.label, item.value === "warn" ? "警告后运行" : item.value === "error" ? "拒绝运行" : "静默运行") }))
+  const networkOptions = () =>
+    NETWORK_OPTS.map((item) => ({ ...item, label: text(item.label, item.value === "allow" ? "允许" : "禁止") }))
+  const fallbackOptions = () =>
+    UNAVAILABLE_OPTS.map((item) => ({
+      ...item,
+      label: text(item.label, item.value === "warn" ? "警告后运行" : item.value === "error" ? "拒绝运行" : "静默运行"),
+    }))
   const sdk = useGlobalSDK()
   const platform = usePlatform()
   const fetchFn = platform.fetch ?? fetch
@@ -93,7 +98,10 @@ const Sandbox: Component = () => {
     try {
       setTest(await call<SelfTest>("/test", { method: "POST" }))
     } catch (err) {
-      showToast({ title: text("Self-test failed to run", "沙箱自检运行失败"), description: err instanceof Error ? err.message : String(err) })
+      showToast({
+        title: text("Self-test failed to run", "沙箱自检运行失败"),
+        description: err instanceof Error ? err.message : String(err),
+      })
     }
     setTesting(false)
   }
@@ -102,7 +110,10 @@ const Sandbox: Component = () => {
     const p = newPath().trim()
     if (!p) return
     if (!p.startsWith("/")) {
-      showToast({ title: text("Use an absolute path", "请使用绝对路径"), description: text("Extra writable paths must start with /.", "额外可写路径必须以 / 开头。") })
+      showToast({
+        title: text("Use an absolute path", "请使用绝对路径"),
+        description: text("Extra writable paths must start with /.", "额外可写路径必须以 / 开头。"),
+      })
       return
     }
     const next = [...(config().allowWrite ?? [])]
@@ -122,7 +133,10 @@ const Sandbox: Component = () => {
             {chinese() ? (
               "将智能体命令限制在操作系统沙箱中：写入范围限定为工作区，并可禁止网络访问。"
             ) : (
-              <>Permissions decide <em>whether</em> the agent runs a shell command — not what it can reach once it does. Turn this on to confine commands inside an OS sandbox.</>
+              <>
+                Permissions decide <em>whether</em> the agent runs a shell command — not what it can reach once it does.
+                Turn this on to confine commands inside an OS sandbox.
+              </>
             )}
           </p>
         </div>
@@ -144,12 +158,16 @@ const Sandbox: Component = () => {
                 when={s().available}
                 fallback={
                   <span>
-                    {text(`No sandbox backend on this machine (${s().platform}) — ${s().reason}.`, `此设备没有可用的沙箱后端（${s().platform}）— ${s().reason}。`)}
+                    {text(
+                      `No sandbox backend on this machine (${s().platform}) — ${s().reason}.`,
+                      `此设备没有可用的沙箱后端（${s().platform}）— ${s().reason}。`,
+                    )}
                   </span>
                 }
               >
                 <span>
-                  {text("Backend ready", "沙箱后端已就绪")}：<b>{s().backend}</b> · <code>{s().tool}</code> ({s().platform})
+                  {text("Backend ready", "沙箱后端已就绪")}：<b>{s().backend}</b> · <code>{s().tool}</code> (
+                  {s().platform})
                 </span>
               </Show>
             </div>
@@ -160,7 +178,9 @@ const Sandbox: Component = () => {
         <section class="flex flex-col gap-3">
           <div class="flex items-center justify-between border border-border-weak-base rounded-[4px] px-4 py-3.5 bg-surface-base/40">
             <div class="flex flex-col gap-0.5 min-w-0 pr-4">
-              <span class="text-14-medium text-text-strong">{text("Sandbox agent commands", "在沙箱中运行智能体命令")}</span>
+              <span class="text-14-medium text-text-strong">
+                {text("Sandbox agent commands", "在沙箱中运行智能体命令")}
+              </span>
               <span class="text-12-regular text-text-weak">
                 {config().enabled
                   ? text("On — commands run confined to the workspace.", "已开启——命令的访问范围被限制在工作区内。")
@@ -202,9 +222,14 @@ const Sandbox: Component = () => {
 
               <div class="flex flex-wrap items-center justify-between gap-4 px-4 py-3.5">
                 <div class="flex flex-col gap-0.5 min-w-0">
-                  <span class="text-14-medium text-text-strong">{text("When no backend is available", "沙箱后端不可用时")}</span>
+                  <span class="text-14-medium text-text-strong">
+                    {text("When no backend is available", "沙箱后端不可用时")}
+                  </span>
                   <span class="text-12-regular text-text-weak">
-                    {text("On a machine with no sandbox (e.g. Windows), how to handle a command.", "设置在没有沙箱支持的设备上如何处理命令。")}
+                    {text(
+                      "On a machine with no sandbox (e.g. Windows), how to handle a command.",
+                      "设置在没有沙箱支持的设备上如何处理命令。",
+                    )}
                   </span>
                 </div>
                 <Select
@@ -224,7 +249,10 @@ const Sandbox: Component = () => {
             <div class="flex flex-col gap-2">
               <span class="text-13-medium text-text-strong">{text("Extra writable paths", "额外可写路径")}</span>
               <span class="text-12-regular text-text-weak/70">
-                {text("Absolute paths — beyond the workspace and temp dirs — the sandbox may write to.", "除工作区和临时目录外，允许沙箱写入的其他绝对路径。")}
+                {text(
+                  "Absolute paths — beyond the workspace and temp dirs — the sandbox may write to.",
+                  "除工作区和临时目录外，允许沙箱写入的其他绝对路径。",
+                )}
               </span>
               <For each={config().allowWrite ?? []}>
                 {(p) => (
@@ -256,7 +284,10 @@ const Sandbox: Component = () => {
                 <div class="flex flex-col gap-0.5">
                   <span class="text-14-medium text-text-strong">{text("Verify containment", "验证隔离效果")}</span>
                   <span class="text-12-regular text-text-weak">
-                    {text("Runs real sandboxed commands to prove writes and network are actually confined.", "运行真实沙箱命令，验证文件写入和网络访问确实受到限制。")}
+                    {text(
+                      "Runs real sandboxed commands to prove writes and network are actually confined.",
+                      "运行真实沙箱命令，验证文件写入和网络访问确实受到限制。",
+                    )}
                   </span>
                 </div>
                 <Button size="small" variant="secondary" disabled={testing() || !status()?.available} onClick={runTest}>
@@ -284,7 +315,12 @@ const Sandbox: Component = () => {
                       class="text-12-medium pt-1"
                       classList={{ "text-text-success": t().ok, "text-text-danger": !t().ok }}
                     >
-                      {t().ok ? text("Containment verified.", "沙箱隔离验证通过。") : text("Containment FAILED — do not rely on the sandbox.", "沙箱隔离验证失败，请勿依赖此沙箱。")}
+                      {t().ok
+                        ? text("Containment verified.", "沙箱隔离验证通过。")
+                        : text(
+                            "Containment FAILED — do not rely on the sandbox.",
+                            "沙箱隔离验证失败，请勿依赖此沙箱。",
+                          )}
                     </span>
                   </div>
                 )}

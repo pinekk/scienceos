@@ -150,7 +150,10 @@ export default function General() {
         </Show>
 
         {/* Account */}
-        <Section title={text("Account", "账户")} description={text("Your unified scienceos account.", "当前工作台使用的统一登录账号。")}>
+        <Section
+          title={text("Account", "账户")}
+          description={text("Your unified scienceos account.", "当前工作台使用的统一登录账号。")}
+        >
           <div class="border border-border-weak-base rounded-[4px] overflow-hidden bg-surface-base/40">
             <Row title={text("Account", "账号")}>
               <span class="text-13-regular text-text-strong">{account()?.username ?? "—"}</span>
@@ -160,7 +163,12 @@ export default function General() {
                 <span class="text-13-medium text-text-success">
                   {account()?.connected ? text("Connected", "已登录") : text("Loading…", "读取中…")}
                 </span>
-                <Button size="small" variant="secondary" disabled={busy() || !account()?.connected} onClick={() => void signOut()}>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  disabled={busy() || !account()?.connected}
+                  onClick={() => void signOut()}
+                >
                   {busy() ? text("signing out…", "正在退出…") : text("sign out", "退出登录")}
                 </Button>
               </div>
@@ -169,9 +177,18 @@ export default function General() {
         </Section>
 
         {/* Model */}
-        <Section title={text("Model", "模型")} description={text("Defaults applied to new sessions and background tasks.", "设置新对话和后台任务使用的默认模型。")}>
+        <Section
+          title={text("Model", "模型")}
+          description={text(
+            "Defaults applied to new sessions and background tasks.",
+            "设置新对话和后台任务使用的默认模型。",
+          )}
+        >
           <div class="border border-border-weak-base rounded-[4px] overflow-hidden bg-surface-base/40">
-            <Row title={text("Default model", "默认模型")} description={text("Primary model used when a session starts.", "新对话启动时使用的主要模型。")}>
+            <Row
+              title={text("Default model", "默认模型")}
+              description={text("Primary model used when a session starts.", "新对话启动时使用的主要模型。")}
+            >
               <Select
                 options={modelOptions()}
                 current={modelOptions().find((o) => o.value === defaultModel())}
@@ -184,7 +201,13 @@ export default function General() {
                 placeholder={text("Auto", "自动")}
               />
             </Row>
-            <Row title={text("Subagent model", "子智能体模型")} description={text("Model for titles, summaries, and subagent tasks (small_model).", "用于标题、摘要与子智能体任务的模型。")}>
+            <Row
+              title={text("Subagent model", "子智能体模型")}
+              description={text(
+                "Model for titles, summaries, and subagent tasks (small_model).",
+                "用于标题、摘要与子智能体任务的模型。",
+              )}
+            >
               <Select
                 options={modelOptions()}
                 current={modelOptions().find((o) => o.value === subagentModel())}
@@ -197,7 +220,10 @@ export default function General() {
                 placeholder={text("Auto", "自动")}
               />
             </Row>
-            <Row title={text("Reasoning effort", "推理强度")} description={text("Thinking budget for models that support it.", "支持推理模型的思考预算。")}>
+            <Row
+              title={text("Reasoning effort", "推理强度")}
+              description={text("Thinking budget for models that support it.", "支持推理模型的思考预算。")}
+            >
               <Select
                 options={reasoning()}
                 current={reasoning().find((o) => o.value === prefs()?.reasoning_effort) ?? reasoning()[2]}

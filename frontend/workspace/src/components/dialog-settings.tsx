@@ -175,9 +175,7 @@ export const DialogSettings: Component<{ initial?: SettingsPanelId }> = (props) 
                 icon={expanded() ? "collapse" : "expand"}
                 variant="ghost"
                 onClick={() => setExpanded((v) => !v)}
-                aria-label={
-                  chinese() ? (expanded() ? "缩小" : "展开") : expanded() ? "Collapse" : "Expand"
-                }
+                aria-label={chinese() ? (expanded() ? "缩小" : "展开") : expanded() ? "Collapse" : "Expand"}
               />
               <IconButton
                 icon="close"

@@ -209,18 +209,10 @@ export function SetupDialog(props: { onDismiss?: () => void }): JSX.Element {
               默认接入
             </span>
           </div>
-          <p style={intro()}>
-            使用产品账号登录。登录状态会安全保存在本机，账号密码不会保存。
-          </p>
+          <p style={intro()}>使用产品账号登录。登录状态会安全保存在本机，账号密码不会保存。</p>
           <div style={{ display: "flex", "flex-direction": "column", gap: "6px" }}>
             <span style={label()}>账号</span>
-            <TextField
-              hideLabel
-              placeholder="请输入账号"
-              value={username()}
-              disabled={busy()}
-              onChange={setUsername}
-            />
+            <TextField hideLabel placeholder="请输入账号" value={username()} disabled={busy()} onChange={setUsername} />
           </div>
           <div style={{ display: "flex", "flex-direction": "column", gap: "6px" }}>
             <span style={label()}>密码</span>
@@ -338,7 +330,8 @@ export function SetupDialog(props: { onDismiss?: () => void }): JSX.Element {
             fallback={
               <p style={intro()}>
                 Connected to Atlas.
-                <Show when={balance() !== undefined}> Wallet balance {money(balance()!)}.</Show> Managed models are ready.
+                <Show when={balance() !== undefined}> Wallet balance {money(balance()!)}.</Show> Managed models are
+                ready.
               </p>
             }
           >

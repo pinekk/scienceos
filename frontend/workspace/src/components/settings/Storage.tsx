@@ -63,10 +63,13 @@ export const Storage: Component = () => {
     setStatus(undefined)
     let target: string | undefined
     if (platform.openDirectoryPickerDialog) {
-      const picked = await platform.openDirectoryPickerDialog({ title: text("Choose a new data location", "选择新的数据存储位置") }).catch(() => null)
+      const picked = await platform
+        .openDirectoryPickerDialog({ title: text("Choose a new data location", "选择新的数据存储位置") })
+        .catch(() => null)
       target = Array.isArray(picked) ? picked[0] : (picked ?? undefined)
     } else {
-      target = window.prompt(text("New absolute path for the data directory:", "请输入数据目录的新绝对路径：")) ?? undefined
+      target =
+        window.prompt(text("New absolute path for the data directory:", "请输入数据目录的新绝对路径：")) ?? undefined
     }
     if (!target?.trim()) return
     setBusy(true)
@@ -77,7 +80,12 @@ export const Storage: Component = () => {
         "/settings/storage/location",
         { method: "POST", body: JSON.stringify({ path: target.trim() }) },
       )
-      setStatus(text(`Data copied to ${res.target}. Restart scienceos to use the new location.`, `数据已复制到 ${res.target}。重启 scienceos 后将使用新位置。`))
+      setStatus(
+        text(
+          `Data copied to ${res.target}. Restart scienceos to use the new location.`,
+          `数据已复制到 ${res.target}。重启 scienceos 后将使用新位置。`,
+        ),
+      )
       await load()
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
@@ -93,7 +101,12 @@ export const Storage: Component = () => {
     setStatus(undefined)
     try {
       await settingsApi(base(), fetchFn(), "/settings/storage/location", { method: "DELETE" })
-      setStatus(text("Custom location cleared. Restart to return to the default directory.", "自定义位置已清除，重启后将恢复默认目录。"))
+      setStatus(
+        text(
+          "Custom location cleared. Restart to return to the default directory.",
+          "自定义位置已清除，重启后将恢复默认目录。",
+        ),
+      )
       await load()
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
@@ -129,7 +142,12 @@ export const Storage: Component = () => {
         <div class="flex flex-col gap-3">
           <div class="flex flex-col gap-1">
             <h3 class="text-13-medium text-text-weak tracking-wide">{text("Data location", "数据位置")}</h3>
-            <p class="text-12-regular text-text-weak">{text("The directory holding sessions, credentials, skills, and logs.", "保存对话、Skills 和运行日志的本地目录。")}</p>
+            <p class="text-12-regular text-text-weak">
+              {text(
+                "The directory holding sessions, credentials, skills, and logs.",
+                "保存对话、Skills 和运行日志的本地目录。",
+              )}
+            </p>
           </div>
           <div style={{ border: "1px solid var(--color-border)", "border-radius": "4px", padding: "16px 18px" }}>
             <div class="flex flex-wrap items-center justify-between gap-3">
@@ -164,7 +182,12 @@ export const Storage: Component = () => {
         <div class="flex flex-col gap-3">
           <div class="flex flex-col gap-1">
             <h3 class="text-13-medium text-text-weak tracking-wide">{text("Disk usage", "磁盘占用")}</h3>
-            <p class="text-12-regular text-text-weak">{text("Top-level entries inside the data directory, largest first.", "按占用空间从大到小显示数据目录中的顶层项目。")}</p>
+            <p class="text-12-regular text-text-weak">
+              {text(
+                "Top-level entries inside the data directory, largest first.",
+                "按占用空间从大到小显示数据目录中的顶层项目。",
+              )}
+            </p>
           </div>
           <Show
             when={usage() && usage()!.entries.length > 0}
@@ -215,7 +238,6 @@ export const Storage: Component = () => {
             </div>
           </Show>
         </div>
-
       </div>
     </div>
   )

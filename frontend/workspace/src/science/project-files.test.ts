@@ -1,5 +1,12 @@
 import { describe, expect, test } from "bun:test"
-import { buildProjectFiles, explainSkill, generateStages, parseProjectFiles, stageProfile, stageSystem } from "./project"
+import {
+  buildProjectFiles,
+  explainSkill,
+  generateStages,
+  parseProjectFiles,
+  stageProfile,
+  stageSystem,
+} from "./project"
 
 describe("buildProjectFiles", () => {
   test("builds a complete operations research fallback project", () => {

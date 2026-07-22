@@ -171,7 +171,13 @@ const Compute: Component = () => {
 
       <div class="flex flex-col gap-8 px-4 pb-12 sm:px-8 max-w-[820px]">
         {/* ── GPU providers (BYOK) ── */}
-        <Section title={text("GPU providers", "GPU 服务商")} subtitle={text("Bring your own key — connect once and work runs under your account.", "接入自己的密钥，任务将在你的服务商账户下运行。") }>
+        <Section
+          title={text("GPU providers", "GPU 服务商")}
+          subtitle={text(
+            "Bring your own key — connect once and work runs under your account.",
+            "接入自己的密钥，任务将在你的服务商账户下运行。",
+          )}
+        >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <For each={info()?.providers}>
               {(p) => (
@@ -215,7 +221,7 @@ const Compute: Component = () => {
           <div class="border border-border-weak-base rounded-[4px] overflow-hidden bg-surface-base/40">
             <Show
               when={(info()?.ssh_hosts.length ?? 0) > 0}
-              fallback={<Empty when={!addingHost()} text={text("No SSH hosts yet.", "尚未添加 SSH 主机。") } />}
+              fallback={<Empty when={!addingHost()} text={text("No SSH hosts yet.", "尚未添加 SSH 主机。")} />}
             >
               <For each={info()?.ssh_hosts}>
                 {(h) => (
@@ -233,15 +239,30 @@ const Compute: Component = () => {
             <Show when={addingHost()}>
               <div class="flex flex-col gap-3 p-4 border-t border-border-weak-base">
                 <div class="grid grid-cols-2 gap-3">
-                  <TextField label={text("Label", "名称")} value={hLabel()} onInput={setHLabel} placeholder="lab-gpu-01" />
+                  <TextField
+                    label={text("Label", "名称")}
+                    value={hLabel()}
+                    onInput={setHLabel}
+                    placeholder="lab-gpu-01"
+                  />
                   <TextField
                     label={text("Host", "主机地址")}
                     value={hHost()}
                     onInput={setHHost}
                     placeholder="10.0.0.4 or gpu.lab.internal"
                   />
-                  <TextField label={text("User (optional)", "用户（可选）")} value={hUser()} onInput={setHUser} placeholder="ubuntu" />
-                  <TextField label={text("Port (optional)", "端口（可选）")} value={hPort()} onInput={setHPort} placeholder="22" />
+                  <TextField
+                    label={text("User (optional)", "用户（可选）")}
+                    value={hUser()}
+                    onInput={setHUser}
+                    placeholder="ubuntu"
+                  />
+                  <TextField
+                    label={text("Port (optional)", "端口（可选）")}
+                    value={hPort()}
+                    onInput={setHPort}
+                    placeholder="22"
+                  />
                 </div>
                 <FormActions
                   onCancel={resetHost}
@@ -256,7 +277,10 @@ const Compute: Component = () => {
         {/* ── Model endpoints ── */}
         <Section
           title={text("Model endpoints", "模型端点")}
-          subtitle={text("Local or remote inference URLs the agent can route requests to.", "可供智能体调用的本地或远程推理地址。")}
+          subtitle={text(
+            "Local or remote inference URLs the agent can route requests to.",
+            "可供智能体调用的本地或远程推理地址。",
+          )}
           action={
             <Button
               size="small"
@@ -272,7 +296,7 @@ const Compute: Component = () => {
           <div class="border border-border-weak-base rounded-[4px] overflow-hidden bg-surface-base/40">
             <Show
               when={(info()?.endpoints.length ?? 0) > 0}
-              fallback={<Empty when={!addingEp()} text={text("No model endpoints yet.", "尚未添加模型端点。") } />}
+              fallback={<Empty when={!addingEp()} text={text("No model endpoints yet.", "尚未添加模型端点。")} />}
             >
               <For each={info()?.endpoints}>
                 {(e) => (
@@ -293,7 +317,12 @@ const Compute: Component = () => {
             <Show when={addingEp()}>
               <div class="flex flex-col gap-3 p-4 border-t border-border-weak-base">
                 <div class="grid grid-cols-2 gap-3">
-                  <TextField label={text("Label", "名称")} value={epLabel()} onInput={setEpLabel} placeholder="local-vllm" />
+                  <TextField
+                    label={text("Label", "名称")}
+                    value={epLabel()}
+                    onInput={setEpLabel}
+                    placeholder="local-vllm"
+                  />
                   <div class="flex flex-col gap-1.5">
                     <span class="text-12-medium text-text-weak">{text("Kind", "类型")}</span>
                     <Select
@@ -339,8 +368,7 @@ const ProviderCard: Component<{
 }> = (props) => {
   const p = () => props.provider
   const language = useLanguage()
-  const text = (en: string, cn: string) =>
-    language.locale() === "zh" || language.locale() === "zht" ? cn : en
+  const text = (en: string, cn: string) => (language.locale() === "zh" || language.locale() === "zht" ? cn : en)
   const hints: Record<string, string> = {
     modal: "无服务器 GPU 计算。",
     tensorpool: "按需使用 GPU 集群。",
@@ -366,9 +394,15 @@ const ProviderCard: Component<{
       <Show when={p().connected}>
         <div class="flex flex-col gap-0.5">
           <Show when={fmtDate(p().connected_at)}>
-            {(d) => <span class="text-11-regular text-text-weak/70">{text("Connected", "连接于")} {d()}</span>}
+            {(d) => (
+              <span class="text-11-regular text-text-weak/70">
+                {text("Connected", "连接于")} {d()}
+              </span>
+            )}
           </Show>
-          <span class="text-11-regular text-text-weak/70">{text("Last used", "最近使用")} {fmtDate(p().last_used) ?? text("never", "从未")}</span>
+          <span class="text-11-regular text-text-weak/70">
+            {text("Last used", "最近使用")} {fmtDate(p().last_used) ?? text("never", "从未")}
+          </span>
         </div>
       </Show>
 
