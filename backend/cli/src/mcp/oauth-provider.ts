@@ -1,10 +1,5 @@
-import {
-  discoverAuthorizationServerMetadata,
-  discoverOAuthProtectedResourceMetadata,
-  refreshAuthorization,
-  selectResourceURL,
-  type OAuthClientProvider,
-} from "@modelcontextprotocol/sdk/client/auth.js"
+import * as OAuth from "@modelcontextprotocol/sdk/client/auth.js"
+import type { OAuthClientProvider } from "@modelcontextprotocol/sdk/client/auth.js"
 import type {
   OAuthClientMetadata,
   OAuthTokens,
@@ -168,11 +163,11 @@ export class McpOAuthProvider implements OAuthClientProvider {
   private async refresh(refreshToken: string): Promise<McpAuth.Tokens> {
     const client = await this.clientInformation()
     if (!client) throw new Error(`no OAuth client information for MCP server: ${this.mcpName}`)
-    const metadata = await discoverOAuthProtectedResourceMetadata(this.serverUrl).catch(() => undefined)
+    const metadata = await OAuth.discoverOAuthProtectedResourceMetadata(this.serverUrl).catch(() => undefined)
     const issuer = metadata?.authorization_servers?.[0] ?? new URL("/", this.serverUrl)
-    const server = await discoverAuthorizationServerMetadata(issuer)
-    const resource = await selectResourceURL(this.serverUrl, this, metadata)
-    const tokens = await refreshAuthorization(issuer, {
+    const server = await OAuth.discoverAuthorizationServerMetadata(issuer)
+    const resource = await OAuth.selectResourceURL(this.serverUrl, this, metadata)
+    const tokens = await OAuth.refreshAuthorization(issuer, {
       metadata: server,
       clientInformation: client,
       refreshToken,
